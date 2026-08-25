@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button, Input } from "@heroui/react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,6 +14,12 @@ export default function Navbar() {
         { name: "Categories", href: "/categories" },
         { name: "Popular", href: "/popular" },
     ];
+
+    const pathName = usePathname()
+
+    if (pathName.includes("dashboard")) {
+        return null
+    }
 
     return (
         <nav className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md">

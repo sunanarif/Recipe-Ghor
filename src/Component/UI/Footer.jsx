@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function AppFooter() {
     const navLinks = [
@@ -10,8 +11,14 @@ export default function AppFooter() {
         { name: "Popular", href: "/popular" },
     ];
 
+    const pathName = usePathname()
+
+    if (pathName.includes("dashboard")) {
+        return null
+    }
+
     return (
-        <footer className="w-full border-t border-border bg-background py-8 h-screen">
+        <footer className="w-full border-t border-border bg-background py-8">
             <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:px-6 md:flex-row">
 
                 {/* LEFT SIDE: Brand Logo */}
