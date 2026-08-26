@@ -1,4 +1,5 @@
 "use client"
+
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Card, Description, FieldError, Form, Input, Label, Separator, TextField } from "@heroui/react";
@@ -10,22 +11,15 @@ const SingUpPage = () => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const user = Object.fromEntries(formData.entries())
-        // console.log(user);
-        const { data, error } = await authClient.signUp.email(
-            {
-                name: user.name,
-                email: user.email,
-                image: user.image,
-                password: user.password
-            }
-        );
-        console.log(data, error);
-        if (data) {
-            redirect('/')
-        }
-        if (error) {
-            alert(error.message)
-        }
+        console.log(user);
+        const { data, error } = await authClient.signUp.email({
+            name: user.name, // required
+            email: user.email,
+            password: user.password, // required
+            image: user.image,
+            callbackURL: "/",
+        });
+
     }
     const handleGoogleSignin = async () => {
         await authClient.signIn.social({

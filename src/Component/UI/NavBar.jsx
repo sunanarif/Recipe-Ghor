@@ -4,7 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button, Input } from "@heroui/react";
 import { usePathname } from "next/navigation";
-
+import { authClient } from "@/lib/auth-client";
+import {ArrowRightFromSquare, Gear, Persons} from "@gravity-ui/icons";
+import {Avatar, Dropdown, Label} from "@heroui/react";
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -19,6 +21,21 @@ export default function Navbar() {
 
     if (pathName.includes("dashboard")) {
         return null
+    }
+
+    const {
+        data: session,
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession()
+
+    const user = session?.user
+    console.log(user);
+    console.log(session);
+
+    const handleLogout=async()=>{
+        await authClient.signOut();
     }
 
     return (
@@ -91,24 +108,72 @@ export default function Navbar() {
 
                 {/* Action Controls */}
                 <div className="flex items-center gap-3">
-                    <Link href="/singin">
-                        <Button
-                            color="warning"
-                            variant="flat"
-                            className="font-semibold text-white bg-orange-500 rounded-md"
-                        >
-                            Sign In
-                        </Button>
-                    </Link>
-                    <Link href="/singup">
-                        <Button
-                            color="warning"
-                            variant="flat"
-                            className="font-semibold text-white bg-orange-500 rounded-md"
-                        >
-                            Sign Up
-                        </Button>
-                    </Link>
+                    {
+                        user ? <>
+                            <Dropdown>
+                                <Dropdown.Trigger className="rounded-full">
+                                    <Avatar>
+                                        <Avatar.Image
+                                            alt="Junior Garcia"
+                                            src={user.image}
+                                        />
+                                        <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+                                    </Avatar>
+                                </Dropdown.Trigger>
+                                <Dropdown.Popover>
+                                    <div className="px-3 pt-3 pb-1">
+                                        <div className="flex items-center gap-2">
+                                            <Avatar size="sm">
+                                                <Avatar.Image
+                                                    alt="userImage"
+                                                    src={user.image}
+                                                />
+                                                <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+                                            </Avatar>
+                                            <div className="flex flex-col gap-0">
+                                                <p className="text-sm leading-5 font-medium">{user.name}</p>
+                                                <p className="text-xs leading-none text-muted">{user.email}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item id="dashboard" textValue="Dashboard">
+                                            <Label>Dashboard</Label>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item id="profile" textValue="Profile">
+                                            <Label>Profile</Label>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item id="logout" textValue="Logout" variant="danger">
+                                            <div className="flex w-full items-center justify-between gap-2" onClick={handleLogout}>
+                                                <Label >Log Out</Label>
+                                                <ArrowRightFromSquare className="size-3.5 text-danger" />
+                                            </div>
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown.Popover>
+                            </Dropdown>
+                        </> :
+                            <>
+                                <Link href="/singin">
+                                    <Button
+                                        color="warning"
+                                        variant="flat"
+                                        className="font-semibold text-white bg-orange-500 rounded-md"
+                                    >
+                                        Sign In
+                                    </Button>
+                                </Link>
+                                <Link href="/singup">
+                                    <Button
+                                        color="warning"
+                                        variant="flat"
+                                        className="font-semibold text-white bg-orange-500 rounded-md"
+                                    >
+                                        Sign Up
+                                    </Button>
+                                </Link>
+                            </>
+                    }
                 </div>
             </header>
 
