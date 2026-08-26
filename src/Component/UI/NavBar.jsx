@@ -91,7 +91,7 @@ export default function Navbar() {
 
                 {/* Action Controls */}
                 <div className="flex items-center gap-3">
-                    <Link href="/login">
+                    <Link href="/singin">
                         <Button
                             color="warning"
                             variant="flat"
@@ -100,7 +100,7 @@ export default function Navbar() {
                             Sign In
                         </Button>
                     </Link>
-                    <Link href="/login">
+                    <Link href="/singup">
                         <Button
                             color="warning"
                             variant="flat"
