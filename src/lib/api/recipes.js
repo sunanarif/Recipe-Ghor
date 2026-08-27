@@ -10,3 +10,8 @@ export const getRecipeById=async(id)=>{
     const res = await fetch(`${baseUrl}/recipe/single/${id}`)
     return res.json()
 }
+
+export const getAllRecipe=async()=>{
+    const res = await fetch(`${baseUrl}/all/recipe`);
+    return res.json()
+}

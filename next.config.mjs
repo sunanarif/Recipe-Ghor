@@ -10,14 +10,14 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'i.ibb.co',
       },
     ],
   },
 
   experimental: {
     serverActions: {
-      bodySizeLimit: '1000mb',  // tomar image size onujayi adjust koro
+      bodySizeLimit: '1000mb',
     },
   },
 

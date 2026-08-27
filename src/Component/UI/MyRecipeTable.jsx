@@ -40,10 +40,10 @@ const MyRecipeTable = ({ recipes }) => {
                                             <Table.Cell >
                                                 <div className={"flex gap-2"}>
 
-                                                    <Button variant='secondary'><Eye></Eye></Button>
+                                                    <Button variant='secondary'><Eye/></Button>
                                                     <Button variant='secondary' onClick={() => { handleDeleteItem(recipe._id) }}><TrashBin /></Button>
                                                     <Link href={`/dashboard/user/my-recipe/${recipe._id}/edit`}>
-                                                        <Button variant='secondary'><Pencil></Pencil></Button>
+                                                        <Button variant='secondary'><Pencil/></Button>
 
                                                     </Link>
                                                 </div>

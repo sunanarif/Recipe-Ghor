@@ -18,7 +18,7 @@ export default function AppFooter() {
     }
 
     return (
-        <footer className="w-full border-t border-border bg-background py-8">
+        <footer className="w-full border-t border-border bg-background py-8 mt-10">
             <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:px-6 md:flex-row">
 
                 {/* LEFT SIDE: Brand Logo */}

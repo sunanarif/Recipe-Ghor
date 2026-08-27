@@ -31,3 +31,15 @@ export const editRecipeById = async(id,formData)=>{
     })
     return res.json()
 }
+
+export const addFavorites = async(favoritesdata)=>{
+    const res = await fetch(`${baseUrl}/favorites`,{
+        method:"POST",
+        headers:{
+            'content-type':'application/json'
+        },
+        body:JSON.stringify(favoritesdata)
+     })
+     const data = await res.json()
+     return data
+}
