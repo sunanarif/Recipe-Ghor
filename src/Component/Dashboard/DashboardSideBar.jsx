@@ -24,7 +24,7 @@ const DashboardSideBar = () => {
     { name: "Overview", href: "/dashboard", icon: LayoutHeaderCellsLarge },
     { name: "Add Recipe", href: "/dashboard/user/add-recipe", icon: Plus },
     { name: "My Recipes", href: "/dashboard/user/my-recipe", icon: ListCheck },
-    { name: "My Favorites", href: "/dashboard/favorites", icon: Heart },
+    { name: "My Favorites", href: "/dashboard/user/my-favorites", icon: Heart },
     { name: "Purchased Recipes", href: "/dashboard/purchased", icon: ShoppingBag },
     { name: "Profile", href: "/dashboard/user/profile", icon: Person },
   ];

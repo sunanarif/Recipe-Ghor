@@ -26,8 +26,6 @@ const RecipeDetail = ({ recipe }) => {
         ingredients,
         instructions,
         userName,
-        userId,
-        userEmail,
         _id
     } = recipe;
 
