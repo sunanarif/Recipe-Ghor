@@ -2,18 +2,22 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  ListCheck, 
-  Heart, 
-  ShoppingBag, 
-  Person, 
+import {
+  ListCheck,
+  Heart,
+  ShoppingBag,
+  Person,
   ArrowRightFromSquare,
   LayoutHeaderCellsLarge,
   ArrowUpRightFromSquare,
   Plus
 } from '@gravity-ui/icons';
+import { authClient } from '@/lib/auth-client';
 
 const DashboardSideBar = () => {
+  const handleLogout = async () => {
+    await authClient.signOut();
+  }
   const pathname = usePathname();
 
   const navLinks = [
@@ -22,7 +26,7 @@ const DashboardSideBar = () => {
     { name: "My Recipes", href: "/dashboard/user/my-recipe", icon: ListCheck },
     { name: "My Favorites", href: "/dashboard/favorites", icon: Heart },
     { name: "Purchased Recipes", href: "/dashboard/purchased", icon: ShoppingBag },
-    { name: "Profile", href: "/dashboard/profile", icon: Person },
+    { name: "Profile", href: "/dashboard/user/profile", icon: Person },
   ];
 
   return (
@@ -49,11 +53,10 @@ const DashboardSideBar = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-                  isActive
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${isActive
                     ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
                     : 'hover:bg-slate-800/80 hover:text-white text-slate-400'
-                }`}
+                  }`}
               >
                 <Icon className={`h-5 w-5 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                 {link.name}
@@ -65,7 +68,7 @@ const DashboardSideBar = () => {
 
       {/* Footer / Logout */}
       <div className="pt-4 border-t border-slate-800">
-        <button 
+        <button onClick={handleLogout}
           className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors"
         >
           <ArrowRightFromSquare className="h-5 w-5" />

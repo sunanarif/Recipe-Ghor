@@ -8,15 +8,14 @@ import { authClient } from "@/lib/auth-client";
 import {ArrowRightFromSquare, Gear, Persons} from "@gravity-ui/icons";
 import {Avatar, Dropdown, Label} from "@heroui/react";
 export default function Navbar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    
     const navLinks = [
         { name: "Home", href: "/" },
-        { name: "Recipes", href: "/recipes" },
-        { name: "Categories", href: "/categories" },
-        { name: "Popular", href: "/popular" },
+        { name: "Browse Recipes", href: "/recipes" },
+       
     ];
-
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
     const pathName = usePathname()
 
     if (pathName.includes("dashboard")) {
@@ -31,8 +30,8 @@ export default function Navbar() {
     } = authClient.useSession()
 
     const user = session?.user
-    console.log(user);
-    console.log(session);
+    // console.log(user);
+    // console.log(session);
 
     const handleLogout=async()=>{
         await authClient.signOut();
@@ -138,7 +137,7 @@ export default function Navbar() {
                                     </div>
                                     <Dropdown.Menu>
                                         <Dropdown.Item id="dashboard" textValue="Dashboard">
-                                            <Label>Dashboard</Label>
+                                            <Link href={'/dashboard'}>Dashboard</Link>
                                         </Dropdown.Item>
                                         <Dropdown.Item id="profile" textValue="Profile">
                                             <Label>Profile</Label>

@@ -15,10 +15,20 @@ import {
 import { Plus, TrashBin, Camera, Clock, Flame } from '@gravity-ui/icons'
 import { addRecipe } from '@/lib/api/action/action'
 import { uploadImage } from '@/lib/api/uploadImage'
+import { authClient } from '@/lib/auth-client'
 
 export default function AddRecipePage() {
     const [loading, setLoading] = useState(false)
 
+    const {
+            data: session,
+            isPending, //loading state
+            error, //error object
+            refetch //refetch the session
+        } = authClient.useSession()
+    
+        const user = session?.user
+        // console.log(user.id);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -29,8 +39,9 @@ export default function AddRecipePage() {
         console.log(formValues);
 
         const image = await uploadImage(formValues.image)
+        console.log(image.url);
 
-        const res = await addRecipe({...formValues,image:image.url})
+        const res = await addRecipe({...formValues,image:image.url,userId:user?.id,userEmail:user?.email,userName:user?.name})
         console.log(res);
 
     }
