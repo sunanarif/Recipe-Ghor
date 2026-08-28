@@ -12,7 +12,7 @@ const MyFavoritesPage = async () => {
     const user = session?.user
     const favoritesData = await getFavoritesByUserId(user?.id)
     
-    console.log(favoritesData);
+    // console.log(favoritesData);
     return (
         <div className='space-y-2 mt-5 w-full'>
             <h1 className='text-[32px] font-bold'>ALL Favorites</h1>

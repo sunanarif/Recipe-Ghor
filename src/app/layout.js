@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
     >
       <body className="flex flex-col ">
         <Navbar></Navbar>
-        <main className="h-screen">
+        <main className="">
           {children}
 
         </main>

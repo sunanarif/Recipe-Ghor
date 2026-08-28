@@ -17,7 +17,7 @@ export const getAllRecipe=async()=>{
 }
 
 export const getFavoritesByUserId = async(userId)=>{
-    console.log("recive uesr id",userId);
+    // console.log("recive uesr id",userId);
     const res = await fetch(`${baseUrl}/favorites/user/${userId}`)
     return res.json()
 }

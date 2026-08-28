@@ -17,7 +17,7 @@ const SingUpPage = () => {
             email: user.email,
             password: user.password, // required
             image: user.image,
-            callbackURL: "/",
+            plan:"free",
         });
 
     }

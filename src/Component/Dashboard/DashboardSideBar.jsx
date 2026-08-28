@@ -119,16 +119,16 @@ const DashboardSideBar = () => {
 
         {/* Footer / Logout */}
         <div className="pt-4 border-t border-slate-800">
-          <button
+          <Link
+          href={'/'}
             onClick={() => {
               setIsOpen(false);
-              handleLogout();
             }}
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors"
           >
             <ArrowRightFromSquare className="h-5 w-5" />
-            Sign Out
-          </button>
+            Back To Home
+          </Link>
         </div>
       </aside>
     </div>

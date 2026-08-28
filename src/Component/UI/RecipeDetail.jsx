@@ -52,13 +52,13 @@ const RecipeDetail = ({ recipe }) => {
     const handleFavorites = async () => {
         const data = await getFavoritesByUserId(user?.id)
         console.log(data);
-        if (user?.id=== undefined) {
+        if (user?.id === undefined) {
             return
         }
         const favoritesData = {
             userId: user?.id,
             userEmail: user?.email,
-            recipeId:_id,
+            recipeId: _id,
             recipeName,
             category,
             image
@@ -161,7 +161,9 @@ const RecipeDetail = ({ recipe }) => {
                 <div className="space-y-3 mt-2 ">
                     <Button variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><ThumbsUpFill />Like</Button>
                     <Button onClick={handleFavorites} variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><BookmarkFill />Favorite Button</Button>
-                    <Button variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><BiSolidPurchaseTag />Purchase Button</Button>
+                    <form method="POST" action={'/api/subscription'}>
+                        <Button type="submit" variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><BiSolidPurchaseTag />Purchase Button</Button>
+                    </form>
                     <Button variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><MdReport />Report Button</Button>
                 </div>
             </Card>
