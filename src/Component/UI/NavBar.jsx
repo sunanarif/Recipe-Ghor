@@ -5,17 +5,17 @@ import Link from "next/link";
 import { Button, Input } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
-import {ArrowRightFromSquare, Gear, Persons} from "@gravity-ui/icons";
-import {Avatar, Dropdown, Label} from "@heroui/react";
+import { ArrowRightFromSquare, Gear, Persons } from "@gravity-ui/icons";
+import { Avatar, Dropdown, Label } from "@heroui/react";
 export default function Navbar() {
-    
+
     const navLinks = [
         { name: "Home", href: "/" },
         { name: "Browse Recipes", href: "/recipes" },
-       
+
     ];
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
+
     const pathName = usePathname()
 
     if (pathName.includes("dashboard")) {
@@ -33,7 +33,7 @@ export default function Navbar() {
     // console.log(user);
     // console.log(session);
 
-    const handleLogout=async()=>{
+    const handleLogout = async () => {
         await authClient.signOut();
     }
 
@@ -152,7 +152,7 @@ export default function Navbar() {
                                 </Dropdown.Popover>
                             </Dropdown>
                         </> :
-                            <>
+                            <div className="hidden md:flex  gap-2">
                                 <Link href="/singin">
                                     <Button
                                         color="warning"
@@ -171,7 +171,7 @@ export default function Navbar() {
                                         Sign Up
                                     </Button>
                                 </Link>
-                            </>
+                            </div>
                     }
                 </div>
             </header>
@@ -180,29 +180,6 @@ export default function Navbar() {
             {isMenuOpen && (
                 <div className="border-t border-border bg-background px-4 pb-4 pt-2 sm:hidden">
 
-                    {/* Mobile Search */}
-                    <div className="mb-3 pt-2">
-                        <Input
-                            placeholder="Search recipes..."
-                            size="sm"
-                            startContent={
-                                <svg
-                                    className="h-4 w-4 text-muted-foreground"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                    />
-                                </svg>
-                            }
-                            type="search"
-                        />
-                    </div>
 
                     {/* Mobile Navigation Links */}
                     <ul className="flex flex-col gap-1">
@@ -219,19 +196,28 @@ export default function Navbar() {
                         ))}
 
                         {/* Mobile Sign In */}
-                        <li className="pt-2">
-                            <Link
-                                href="/login"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
+                        <li className="pt-2 ">
+                            <Link href="/singin" >
                                 <Button
+                                    onClick={() => setIsMenuOpen(false)}
                                     color="warning"
                                     variant="flat"
-                                    className="w-full font-semibold text-orange-700 bg-orange-100 dark:bg-orange-950/40 dark:text-orange-400"
+                                    className="my-4 w-full font-semibold text-orange-700 bg-orange-100 dark:bg-orange-950/40 dark:text-orange-400"
                                 >
                                     Sign In
                                 </Button>
                             </Link>
+                            <Link href="/singup" >
+                                <Button
+                                    onClick={() => setIsMenuOpen(false)}
+                                    color="warning"
+                                    variant="flat"
+                                    className="w-full font-semibold text-orange-700 bg-orange-100 dark:bg-orange-950/40 dark:text-orange-400"
+                                >
+                                    Sign Up
+                                </Button>
+                            </Link>
+
                         </li>
                     </ul>
                 </div>

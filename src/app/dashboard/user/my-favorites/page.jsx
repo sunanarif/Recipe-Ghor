@@ -10,7 +10,8 @@ const MyFavoritesPage = async () => {
         headers: await headers() // you need to pass the headers object.
     })
     const user = session?.user
-    const favoritesData = await getFavoritesByUserId(user.id)
+    const favoritesData = await getFavoritesByUserId(user?.id)
+    
     console.log(favoritesData);
     return (
         <div className='space-y-2 mt-5 w-full'>

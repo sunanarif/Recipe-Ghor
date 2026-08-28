@@ -39,11 +39,12 @@ const MyRecipeTable = ({ recipes }) => {
                                             <Table.Cell>{recipe.cuisine}</Table.Cell>
                                             <Table.Cell >
                                                 <div className={"flex gap-2"}>
-
-                                                    <Button variant='secondary'><Eye/></Button>
+                                                    <Link href={`/recipes/${recipe._id}`}>
+                                                        <Button variant='secondary'><Eye /></Button>
+                                                    </Link>
                                                     <Button variant='secondary' onClick={() => { handleDeleteItem(recipe._id) }}><TrashBin /></Button>
                                                     <Link href={`/dashboard/user/my-recipe/${recipe._id}/edit`}>
-                                                        <Button variant='secondary'><Pencil/></Button>
+                                                        <Button variant='secondary'><Pencil /></Button>
 
                                                     </Link>
                                                 </div>

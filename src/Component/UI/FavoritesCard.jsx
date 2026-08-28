@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LuArrowUpRight } from "react-icons/lu";
 const FavoritesCard = ({ favoriteData }) => {
-    const { _id, recipeName, image, category, difficulty, cuisine } = favoriteData;
+    const { recipeId, recipeName, image, category, difficulty, cuisine } = favoriteData;
     return (
         <div className="">
 
@@ -33,7 +33,7 @@ const FavoritesCard = ({ favoriteData }) => {
                         </p>
                     </div>
                 </div>
-                <Link href={`/recipes/${_id}`}>
+                <Link href={`/recipes/${recipeId}`}>
                     <Button className={"font-semibold text-white bg-orange-500 rounded-md"}>Detail <LuArrowUpRight /></Button>
                 </Link>
 

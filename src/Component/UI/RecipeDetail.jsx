@@ -8,6 +8,7 @@ import { MdReport } from "react-icons/md";
 import { FaLocationArrow } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 import { addFavorites } from "@/lib/api/action/action";
+import { getFavoritesByUserId } from "@/lib/api/recipes";
 
 const difficultyStyles = {
     easy: "bg-emerald-50 text-emerald-600",
@@ -44,23 +45,33 @@ const RecipeDetail = ({ recipe }) => {
 
     const {
         data: session,
-        isPending, //loading state
-        error, //error object
-        refetch //refetch the session
     } = authClient.useSession()
 
     const user = session?.user
-    console.log("user id",user?.id);
+    console.log("user id", user?.id);
     const handleFavorites = async () => {
+        const data = await getFavoritesByUserId(user?.id)
+        console.log(data);
+        if (user?.id=== undefined) {
+            return
+        }
         const favoritesData = {
-            userId:user?.id,
-            userEmail:user?.email,
-            _id,
+            userId: user?.id,
+            userEmail: user?.email,
+            recipeId:_id,
             recipeName,
             category,
             image
         }
+        const isAlreadyFavorite = data.some((fav) => fav.recipeId === _id)
+        console.log(isAlreadyFavorite);
+        if (isAlreadyFavorite) {
+            alert("you already add this")
+            return
+        }
+        console.log("sending favorites data", favoritesData);
         const res = await addFavorites(favoritesData)
+        console.log("favorites data res ", res);
     }
     return (
         <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
