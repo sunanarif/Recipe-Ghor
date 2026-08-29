@@ -23,13 +23,17 @@ export default function AddRecipePage() {
 
       const image = await uploadImage(formValues.image)
 
-      const res = await addRecipe({
+      const data = {
         ...formValues,
         image: image?.url || '',
         userId: user?.id,
         userEmail: user?.email,
         userName: user?.name,
-      })
+        isFeatured:false,
+        likesCount:0
+      }
+      console.log(data);
+      const res = await addRecipe(data)
 
       console.log('Recipe added:', res)
     } catch (error) {

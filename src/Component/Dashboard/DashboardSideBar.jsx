@@ -47,9 +47,9 @@ const DashboardSideBar = () => {
       { name: 'Profile', href: '/dashboard/user/profile', icon: Person },
     ],
     admin: [
-      { name: 'Overview', href: '/dashboard/admin', icon: LayoutHeaderCellsLarge },
-      { name: 'MANAGE USERS', href: '/dashboard/admin/add-recipe', icon: PersonFill },
-      { name: 'MANAGE RECIPES', href: '/dashboard/admin/my-recipe', icon: GiCookingPot },
+      { name: 'Overview', href: '/dashboard/admin/overview', icon: LayoutHeaderCellsLarge },
+      { name: 'MANAGE USERS', href: '/dashboard/admin/manage-user', icon: PersonFill },
+      { name: 'MANAGE RECIPES', href: '/dashboard/admin/manage-recipe', icon: GiCookingPot },
       { name: 'RECIPE REPORTS', href: '/dashboard/admin/my-favorites', icon: ChartPie },
       { name: 'TRANSACTIONS Recipes', href: '/dashboard/admin/my-purchase', icon: PiChalkboardSimpleDuotone },
 

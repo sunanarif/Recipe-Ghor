@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Card, Description, FieldError, Form, Input, Label, Separator, TextField } from "@heroui/react";
+
 import { redirect } from "next/navigation";
 import { IconBase } from "react-icons";
 
@@ -18,8 +19,13 @@ const SingUpPage = () => {
             password: user.password, // required
             image: user.image,
             plan:"free",
+            isBlock:false,
         });
-
+        console.log(data);
+        if (data) {
+            redirect('/')
+        }
+        
     }
     const handleGoogleSignin = async () => {
         await authClient.signIn.social({

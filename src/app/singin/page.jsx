@@ -12,6 +12,7 @@ import {
 import { Envelope, Lock } from '@gravity-ui/icons'
 import Link from 'next/link'
 import { authClient } from '@/lib/auth-client'
+import { redirect } from 'next/navigation'
 
 export default function SignInPage() {
     const [loading, setLoading] = useState(false)
@@ -29,6 +30,9 @@ export default function SignInPage() {
             password: formValues.password, // required
             callbackURL: "/",
         });
+        if (data.user.isBlock) {
+            redirect('/user-block')
+        }
         console.log(data);
     }
 

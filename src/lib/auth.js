@@ -20,7 +20,12 @@ export const auth = betterAuth({
         },
         plan:{
           defaultValue:"free"
-        }
+        },
+        isBlock: {
+        type: "boolean",
+        defaultValue: false,
+        required: false,
+      },
     }
   }
 });
