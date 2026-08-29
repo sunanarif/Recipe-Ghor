@@ -1,4 +1,4 @@
-import {  subscription } from '@/lib/api/action/payment'
+import { purchase } from '@/lib/api/action/payment'
 import { auth } from '@/lib/auth'
 import { stripe } from '@/lib/stripe'
 import { ArrowRight, BookOpen, Check, Clock, Envelope } from '@gravity-ui/icons'
@@ -16,11 +16,14 @@ export default async function Success({ searchParams }) {
   })
   const user = session?.user
 
+
+
   if (!session_id)
     throw new Error('Please provide a valid session_id (`cs_test_...`)')
 
   const {
     status,
+    metadata,
     customer_details: { email: customerEmail }
   } = await stripe.checkout.sessions.retrieve(session_id, {
     expand: ['line_items', 'payment_intent']
@@ -31,8 +34,8 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === 'complete') {
-    const subscriptionRes = await subscription({user,session_id})
-    console.log(subscription);
+    const payment = await purchase({...metadata,session_id})
+    console.log(payment);
     return (
       <div className="min-h-[85vh] flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-slate-50/50">
         <Card className="max-w-xl w-full p-6 sm:p-10 shadow-xl border border-slate-100 bg-white text-center rounded-3xl">

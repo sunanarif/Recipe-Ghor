@@ -21,3 +21,8 @@ export const getFavoritesByUserId = async(userId)=>{
     const res = await fetch(`${baseUrl}/favorites/user/${userId}`)
     return res.json()
 }
+
+export const getPaymentDetailById = async(userId)=>{
+    const res = await fetch(`${baseUrl}/purchase/user/${userId}`)
+    return res.json()
+}

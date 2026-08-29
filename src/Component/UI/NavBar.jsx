@@ -18,23 +18,23 @@ export default function Navbar() {
 
     const pathName = usePathname()
 
-    if (pathName.includes("dashboard")) {
-        return null
-    }
-
+    
     const {
         data: session,
         isPending, //loading state
         error, //error object
         refetch //refetch the session
     } = authClient.useSession()
-
+    
     const user = session?.user
     // console.log(user);
     // console.log(session);
-
+    
     const handleLogout = async () => {
         await authClient.signOut();
+    }
+    if (pathName.includes("dashboard")) {
+        return null
     }
 
     return (
@@ -137,10 +137,10 @@ export default function Navbar() {
                                     </div>
                                     <Dropdown.Menu>
                                         <Dropdown.Item id="dashboard" textValue="Dashboard">
-                                            <Link href={'/dashboard'}>Dashboard</Link>
+                                            <Link href={`/dashboard/${user?.role}/overview`}>Dashboard</Link>
                                         </Dropdown.Item>
                                         <Dropdown.Item id="profile" textValue="Profile">
-                                            <Label>Profile</Label>
+                                            <Link href={'/dashboard/user/profile'}>Profile</Link>
                                         </Dropdown.Item>
                                         <Dropdown.Item id="logout" textValue="Logout" variant="danger">
                                             <div className="flex w-full items-center justify-between gap-2" onClick={handleLogout}>

@@ -29,6 +29,7 @@ const RecipeDetail = ({ recipe }) => {
         userName,
         _id
     } = recipe;
+    console.log(_id);
 
     const difficultyClass =
         difficultyStyles[difficulty?.toLowerCase()] || "bg-slate-100 text-slate-600";
@@ -161,7 +162,10 @@ const RecipeDetail = ({ recipe }) => {
                 <div className="space-y-3 mt-2 ">
                     <Button variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><ThumbsUpFill />Like</Button>
                     <Button onClick={handleFavorites} variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><BookmarkFill />Favorite Button</Button>
-                    <form method="POST" action={'/api/subscription'}>
+                    <form method="POST" action={'/api/payment'}>
+                        <input type="hidden" value={recipeName} name="recipeName" />
+                        <input type="hidden" value={_id} name="recipeId"/>
+                        
                         <Button type="submit" variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><BiSolidPurchaseTag />Purchase Button</Button>
                     </form>
                     <Button variant="outline" className={"w-full rounded-md hover:bg-orange-500 hover:text-white font-bold text-[15px]"}><MdReport />Report Button</Button>

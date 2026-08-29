@@ -12,30 +12,53 @@ import {
   LayoutHeaderCellsLarge,
   Plus,
   Bars,
-  XmarkShapeFill
+  XmarkShapeFill,
+  PersonFill,
+  ChartPie
 } from '@gravity-ui/icons';
 import { authClient } from '@/lib/auth-client';
+import { GiCookingPot } from 'react-icons/gi';
+import { PiChalkboardSimpleDuotone } from 'react-icons/pi';
 
 const DashboardSideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const handleLogout = async () => {
-    await authClient.signOut();
-  };
+  const {
+    data: session,
+    isPending, //loading state
+    error, //error object
+    refetch //refetch the session
+  } = authClient.useSession()
+
+  const user = session?.user
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const navLinks = [
-    { name: "Overview", href: "/dashboard", icon: LayoutHeaderCellsLarge },
-    { name: "Add Recipe", href: "/dashboard/user/add-recipe", icon: Plus },
-    { name: "My Recipes", href: "/dashboard/user/my-recipe", icon: ListCheck },
-    { name: "My Favorites", href: "/dashboard/user/my-favorites", icon: Heart },
-    { name: "Purchased Recipes", href: "/dashboard/purchased", icon: ShoppingBag },
-    { name: "Profile", href: "/dashboard/user/profile", icon: Person },
-  ];
+  const dashboardItems = {
+    user: [
+      { name: 'Overview', href: '/dashboard/user/overview', icon: LayoutHeaderCellsLarge },
+      { name: 'Add Recipe', href: '/dashboard/user/add-recipe', icon: Plus },
+      { name: 'My Recipes', href: '/dashboard/user/my-recipe', icon: ListCheck },
+      { name: 'My Favorites', href: '/dashboard/user/my-favorites', icon: Heart },
+      { name: 'Purchased Recipes', href: '/dashboard/user/my-purchase', icon: ShoppingBag },
+      { name: 'Profile', href: '/dashboard/user/profile', icon: Person },
+    ],
+    admin: [
+      { name: 'Overview', href: '/dashboard/admin', icon: LayoutHeaderCellsLarge },
+      { name: 'MANAGE USERS', href: '/dashboard/admin/add-recipe', icon: PersonFill },
+      { name: 'MANAGE RECIPES', href: '/dashboard/admin/my-recipe', icon: GiCookingPot },
+      { name: 'RECIPE REPORTS', href: '/dashboard/admin/my-favorites', icon: ChartPie },
+      { name: 'TRANSACTIONS Recipes', href: '/dashboard/admin/my-purchase', icon: PiChalkboardSimpleDuotone },
+
+    ]
+  }
+
+
+  const role = user?.role || 'user';
+  const navLinks = dashboardItems[role];
 
   return (
     <div>
@@ -66,9 +89,8 @@ const DashboardSideBar = () => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col justify-between p-4 border-r border-slate-800 transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:min-h-screen ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col justify-between p-4 border-r border-slate-800 transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:min-h-screen ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div>
           {/* Brand Header */}
@@ -103,11 +125,10 @@ const DashboardSideBar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-                    isActive
-                      ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
-                      : 'hover:bg-slate-800/80 hover:text-white text-slate-400'
-                  }`}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${isActive
+                    ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
+                    : 'hover:bg-slate-800/80 hover:text-white text-slate-400'
+                    }`}
                 >
                   <Icon className={`h-5 w-5 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                   {link.name}
@@ -120,7 +141,7 @@ const DashboardSideBar = () => {
         {/* Footer / Logout */}
         <div className="pt-4 border-t border-slate-800">
           <Link
-          href={'/'}
+            href={'/'}
             onClick={() => {
               setIsOpen(false);
             }}

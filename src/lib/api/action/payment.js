@@ -11,3 +11,14 @@ export const subscription = async(data)=>{
     })
     return res.json()
 }
+
+export const purchase = async(data)=>{
+    const res = await fetch(`${baseUrl}/purchase`,{
+        method:"POST",
+        headers:{
+            'content-type':'application/json'
+        },
+        body:JSON.stringify(data)
+    })
+    return res.json()
+}
