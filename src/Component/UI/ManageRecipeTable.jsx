@@ -5,23 +5,28 @@ import { Button, Chip, Table, Tooltip } from '@heroui/react';
 
 import Link from 'next/link';
 import { deleteRecipeById, editFeature } from '@/lib/api/action/action';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
-    const ManageRecipeTable = ({ recipes }) => {
-    const handleFeature = async(id,isFeatured)=>{
+
+const ManageRecipeTable = ({ recipes }) => {
+    const router = useRouter()
+    const handleFeature = async (id, isFeatured) => {
         console.log(isFeatured);
-        const res = await editFeature(id,isFeatured)
+        const res = await editFeature(id, isFeatured)
+        if (res.modifiedCount > 0) {
+            router.refresh()
+        }
         // console.log(res);
     }
-     const handleDeleteItem = async (id) => {
-    
-            const res = await deleteRecipeById(id)
-            console.log("DELETE RESPONSE:", res)
-            if (res.deletedCount > 0) {
-                redirectt('/dashboard/admin/manage-recipe')
-            }
-    
+    const handleDeleteItem = async (id) => {
+
+        const res = await deleteRecipeById(id)
+        console.log("DELETE RESPONSE:", res)
+        if (res.deletedCount > 0) {
+            router.refresh()
         }
+
+    }
     return (
         <div className="w-full bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-3xl p-4 sm:p-6 shadow-xl shadow-slate-200/50 mt-[10%]">
 
@@ -107,24 +112,24 @@ import { redirect } from 'next/navigation';
                                         <Table.Cell className="py-4 px-6 text-right">
                                             <div className="flex items-center justify-end gap-1.5">
 
-                                                
+
                                                 <Tooltip content="View Recipe">
 
                                                     {
-                                                    recipe.isFeatured ? <Button
-                                                        onClick={()=>handleFeature(recipe._id,!recipe.isFeatured)}
-                                                        size="sm"
-                                                        className=" p-4 bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-600 rounded-xl transition-all shadow-sm flex items-center justify-center"
-                                                    >
-                                                        UnFetature
-                                                    </Button>:
-                                                    <Button
-                                                        onClick={()=>handleFeature(recipe._id,!recipe.isFeatured)}
-                                                        size="sm"
-                                                        className=" p-4 bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-600 rounded-xl transition-all shadow-sm flex items-center justify-center"
-                                                    >
-                                                        Fetature
-                                                    </Button>
+                                                        recipe.isFeatured ? <Button
+                                                            onClick={() => handleFeature(recipe._id, !recipe.isFeatured)}
+                                                            size="sm"
+                                                            className=" p-4 bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-600 rounded-xl transition-all shadow-sm flex items-center justify-center"
+                                                        >
+                                                            UnFetature
+                                                        </Button> :
+                                                            <Button
+                                                                onClick={() => handleFeature(recipe._id, !recipe.isFeatured)}
+                                                                size="sm"
+                                                                className=" p-4 bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-600 rounded-xl transition-all shadow-sm flex items-center justify-center"
+                                                            >
+                                                                Fetature
+                                                            </Button>
                                                     }
 
                                                 </Tooltip>

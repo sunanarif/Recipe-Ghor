@@ -5,12 +5,19 @@ import { Button, Chip, Table } from '@heroui/react';
 import { GoBlocked } from 'react-icons/go';
 import Link from 'next/link';
 import React from 'react';
+import { useRouter } from 'next/navigation';
+
+
 
 const ManageUserTable = ({ usersData }) => {
+   const router = useRouter()
   const handleBlock = async (isBlock,id) => {
     console.log(id);
     const res = await editBlockUser(id,isBlock)
     console.log(res);
+    if (res.modifiedCount>0) {
+      router.refresh()
+    }
   }
   return (
     <div className="w-full bg-white/70 backdrop-blur-md border border-slate-200/80 rounded-3xl p-4 sm:p-6 shadow-xl shadow-slate-200/50 mt-[10%]">
