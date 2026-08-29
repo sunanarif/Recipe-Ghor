@@ -2,6 +2,7 @@
 
 import { editRecipeById } from "@/lib/api/action/action";
 import { uploadImage } from "@/lib/api/uploadImage";
+import { authClient } from "@/lib/auth-client";
 import { Camera, Clock, Flame, Pencil, Rocket } from "@gravity-ui/icons";
 import { Button, Modal } from "@heroui/react";
 import {
@@ -17,6 +18,15 @@ import {
 } from '@heroui/react'
 import { redirect } from "next/navigation";
 export function EditModal({ recipe }) {
+    const {
+        data: session,
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession()
+
+    const user = session?.user
+    // console.log(user);
     // console.log(recipe);
     const { _id } = recipe
     const handleSubmit = async (e) => {
@@ -33,10 +43,13 @@ export function EditModal({ recipe }) {
             imageUrl = uploaded.url
         }
 
-        const res = await editRecipeById( _id,{ ...formValues, image: imageUrl })
+        const res = await editRecipeById(_id, { ...formValues, image: imageUrl })
         console.log(res)
-        if(res.modifiedCount>0){
+        if (res.modifiedCount > 0 && user?.role == 'user') {
             redirect("/dashboard/user/my-recipe")
+        }
+        else{
+            redirect('/dashboard/admin/manage-recipe')
         }
     }
     return (

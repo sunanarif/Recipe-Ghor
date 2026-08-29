@@ -4,10 +4,24 @@ import { ArrowUpRightFromSquare, Eye, Pencil, TrashBin } from '@gravity-ui/icons
 import { Button, Chip, Table, Tooltip } from '@heroui/react';
 
 import Link from 'next/link';
+import { deleteRecipeById, editFeature } from '@/lib/api/action/action';
+import { redirect } from 'next/navigation';
+
     const ManageRecipeTable = ({ recipes }) => {
     const handleFeature = async(id,isFeatured)=>{
-        
+        console.log(isFeatured);
+        const res = await editFeature(id,isFeatured)
+        // console.log(res);
     }
+     const handleDeleteItem = async (id) => {
+    
+            const res = await deleteRecipeById(id)
+            console.log("DELETE RESPONSE:", res)
+            if (res.deletedCount > 0) {
+                redirectt('/dashboard/admin/manage-recipe')
+            }
+    
+        }
     return (
         <div className="w-full bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-3xl p-4 sm:p-6 shadow-xl shadow-slate-200/50 mt-[10%]">
 

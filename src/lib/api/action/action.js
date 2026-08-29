@@ -44,8 +44,13 @@ export const addFavorites = async(favoritesdata)=>{
      return data
 }
 
-export const editFeature = async()=>{
-    const res = await fetch(`${baseUrl}/edit/feature`,{
+export const editFeature = async(id,isFeatured)=>{
+    const res = await fetch(`${baseUrl}/edit/feature/${id}`,{
         method:"PATCH",
+        headers:{
+            'content-type':'application/json'
+        },
+        body:JSON.stringify({isFeatured})
     })
+    return res.json()
 }

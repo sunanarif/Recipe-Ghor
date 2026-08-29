@@ -8,7 +8,7 @@ const RecipePage = async () => {
     return (
         <div className='max-w-[1200px] mx-auto py-2'>
             <h1 className="text-[32px] font-bold">Recipes</h1>
-            <div className='grid grid-cols-3 w-full  py-6'>
+            <div className='grid grid-cols-1 md:grid-cols-3 w-full  py-6'>
                 {
                     allRecipes.map(recipe => <RecipeCard key={recipe._id} recipe={recipe}></RecipeCard>)
                 }

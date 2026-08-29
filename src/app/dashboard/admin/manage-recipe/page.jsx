@@ -4,7 +4,7 @@ import React from 'react';
 
 const ManageRecipePage = async() => {
     const recipes = await getAllRecipe()
-    console.log(recipes);
+    // console.log(recipes);
     return (
         <div>
             <ManageRecipeTable recipes={recipes}></ManageRecipeTable>
