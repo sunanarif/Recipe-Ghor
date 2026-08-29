@@ -30,10 +30,7 @@ export default function SignInPage() {
             password: formValues.password, // required
             callbackURL: "/",
         });
-        // if (data.user.isBlock) {
-        //     redirect('/user-block')
-        // }
-        console.log(data);
+        // console.log(data);
     }
 
     return (

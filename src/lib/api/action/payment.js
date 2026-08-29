@@ -22,3 +22,8 @@ export const purchase = async(data)=>{
     })
     return res.json()
 }
+
+export const transaction = async()=>{
+    const res = await fetch(`${baseUrl}/subscription`)
+    return res.json()
+}
