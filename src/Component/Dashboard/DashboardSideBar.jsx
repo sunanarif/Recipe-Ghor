@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -22,16 +22,15 @@ import { PiChalkboardSimpleDuotone } from 'react-icons/pi';
 
 const DashboardSideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const pathname = usePathname();
 
-  const {
-    data: session,
-    isPending,
-    error,
-    refetch
-  } = authClient.useSession()
-
+  const { data: session } = authClient.useSession()
   const user = session?.user
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -112,27 +111,35 @@ const DashboardSideBar = () => {
           </div>
 
           {/* Navigation Links */}
-          <nav className="space-y-1.5">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              const isActive = pathname === link.href;
+          {!hasMounted ? (
+            <div className="space-y-1.5 animate-pulse">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="h-11 rounded-xl bg-slate-800/60" />
+              ))}
+            </div>
+          ) : (
+            <nav className="space-y-1.5">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                const isActive = pathname === link.href;
 
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${isActive
-                    ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
-                    : 'hover:bg-slate-800/80 hover:text-white text-slate-400'
-                    }`}
-                >
-                  <Icon className={`h-5 w-5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                  <span className="truncate">{link.name}</span>
-                </Link>
-              );
-            })}
-          </nav>
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${isActive
+                      ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
+                      : 'hover:bg-slate-800/80 hover:text-white text-slate-400'
+                      }`}
+                  >
+                    <Icon className={`h-5 w-5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                    <span className="truncate">{link.name}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+          )}
         </div>
 
         {/* Footer / Logout */}

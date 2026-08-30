@@ -6,6 +6,7 @@ import { Camera, Clock, Flame } from '@gravity-ui/icons'
 import { addRecipe } from '@/lib/api/action/action'
 import { uploadImage } from '@/lib/api/uploadImage'
 import { authClient } from '@/lib/auth-client'
+import { redirect } from 'next/navigation'
 
 export default function AddRecipePage() {
   const [loading, setLoading] = useState(false)
@@ -34,8 +35,11 @@ export default function AddRecipePage() {
         likesCount: 0
       }
       
-      const res = await addRecipe(data)
-      console.log('Recipe added:', res)
+      const res = await addRecipe(data);
+      if (res.insertedId) {
+        console.log('Recipe added:', res)
+        redirect('/dashboard/user/my-recipe')
+      }
     } catch (error) {
       console.error('Error adding recipe:', error)
     } finally {

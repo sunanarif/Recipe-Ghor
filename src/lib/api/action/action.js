@@ -83,3 +83,11 @@ export const deleteReportById = async (id) => {
 
     return data
 }
+export const deleteFavorites = async (id) => {
+    const res = await fetch(`${baseUrl}/favorites/${id}`, {
+      method: "DELETE"
+    })
+    const data = await res.json()
+
+    return data
+}

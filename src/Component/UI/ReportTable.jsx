@@ -8,14 +8,15 @@ import { useRouter } from 'next/navigation';
 
 const ReportTable = ({ reports }) => {
     const router = useRouter();
-    const handleDeleteItem = async (id) => {
-        console.log(id);
+    const handleDeleteItem = async (recipeId,_id) => {
+        // console.log(id);
         const confirmDelete = confirm("Are you sure you want to delete this recipe?");
         if (!confirmDelete) return;
 
         
         try {
-            const res = await deleteRecipeById(id);
+            const res = await deleteRecipeById(recipeId);
+            const reportRes = await deleteReportById(_id);
             console.log(res);
             if (res?.deletedCount > 0 || res?.success) {
                 router.refresh();
@@ -112,7 +113,7 @@ const ReportTable = ({ reports }) => {
                                         <Table.Cell className="py-3 sm:py-4 px-3 sm:px-6 text-right">
                                             <div className="flex items-center justify-end gap-2">
                                                 <Button
-                                                    onClick={() => handleDeleteItem(report.recipeId)}
+                                                    onClick={() => handleDeleteItem(report.recipeId,report._id)}
                                                     size="sm"
                                                     className="bg-slate-100 hover:bg-red-500 hover:text-white text-slate-700 font-semibold rounded-xl transition-all shadow-sm flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs whitespace-nowrap"
                                                 >
