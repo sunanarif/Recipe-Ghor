@@ -74,3 +74,12 @@ export const reportRecipe = async (report) => {
   })
   return await res.json()
 }
+
+export const deleteReportById = async (id) => {
+    const res = await fetch(`${baseUrl}/report/${id}`, {
+      method: "DELETE"
+    })
+    const data = await res.json()
+
+    return data
+}

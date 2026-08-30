@@ -26,3 +26,7 @@ export const getPaymentDetailById = async(userId)=>{
     const res = await fetch(`${baseUrl}/purchase/user/${userId}`)
     return res.json()
 }
+export const getReport = async()=>{
+    const res = await fetch(`${baseUrl}/report`)
+    return res.json()
+}

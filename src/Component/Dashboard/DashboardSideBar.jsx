@@ -50,7 +50,7 @@ const DashboardSideBar = () => {
       { name: 'Overview', href: '/dashboard/admin/overview', icon: LayoutHeaderCellsLarge },
       { name: 'MANAGE USERS', href: '/dashboard/admin/manage-user', icon: PersonFill },
       { name: 'MANAGE RECIPES', href: '/dashboard/admin/manage-recipe', icon: GiCookingPot },
-      { name: 'RECIPE REPORTS', href: '/dashboard/admin/my-favorites', icon: ChartPie },
+      { name: 'RECIPE REPORTS', href: '/dashboard/admin/reports', icon: ChartPie },
       { name: 'TRANSACTIONS Recipes', href: '/dashboard/admin/transaction', icon: PiChalkboardSimpleDuotone },
     ]
   }

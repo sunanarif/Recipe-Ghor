@@ -3,12 +3,12 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 
 const COLORS = ['#eb6834', '#1baf7a', '#6250d6', '#e34948']
 
-export default function DashboardStatsChart({ totalUsers, totalRecipes, totalPremiumMembers, totalReports }) {
+export default function DashboardStatsChart({ totalUsers, totalRecipes, totalPremiumMembers, totalReport }) {
   const data = [
     { name: 'Users', value: totalUsers || 0 },
     { name: 'Recipes', value: totalRecipes || 0 },
     { name: 'Premium', value: totalPremiumMembers || 0 },
-    { name: 'Reports', value: totalReports || 0 },
+    { name: 'Reports', value: totalReport || 0 },
   ]
 
   return (

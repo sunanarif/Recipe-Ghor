@@ -9,6 +9,7 @@ import { redirect, useRouter } from 'next/navigation';
 
 
 const ManageRecipeTable = ({ recipes }) => {
+    console.log(recipes);
     const router = useRouter()
     const handleFeature = async (id, isFeatured) => {
         const res = await editFeature(id, isFeatured)
