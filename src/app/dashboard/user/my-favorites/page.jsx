@@ -16,7 +16,7 @@ const MyFavoritesPage = async () => {
     return (
         <div className='space-y-2 mt-5 w-full'>
             <h1 className='text-[32px] font-bold'>ALL Favorites</h1>
-            <div className='grid grid-cols-4 gap-6 w-full'>
+            <div className='grid md:grid-cols-4 grid-cols-1 gap-6 w-full'>
 
                 {
                     favoritesData.map(favoriteData => <FavoritesCard favoriteData={favoriteData} key={favoriteData._id}></FavoritesCard>)

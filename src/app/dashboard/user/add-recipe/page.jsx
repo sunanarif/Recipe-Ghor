@@ -19,9 +19,10 @@ export default function AddRecipePage() {
 
     try {
       const formData = new FormData(e.currentTarget)
+      const imageFile = formData.get('image')
+      
+      const image = await uploadImage(imageFile)
       const formValues = Object.fromEntries(formData.entries())
-
-      const image = await uploadImage(formValues.image)
 
       const data = {
         ...formValues,
@@ -29,12 +30,11 @@ export default function AddRecipePage() {
         userId: user?.id,
         userEmail: user?.email,
         userName: user?.name,
-        isFeatured:false,
-        likesCount:0
+        isFeatured: false,
+        likesCount: 0
       }
-      console.log(data);
+      
       const res = await addRecipe(data)
-
       console.log('Recipe added:', res)
     } catch (error) {
       console.error('Error adding recipe:', error)
@@ -44,16 +44,16 @@ export default function AddRecipePage() {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-      <Card className="p-4 sm:p-6 lg:p-8 shadow-lg border border-slate-100">
+    <div className="w-full max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
+      <Card className="p-4 sm:p-6 md:p-8 shadow-sm sm:shadow-md border border-slate-100 rounded-2xl bg-white">
         
-        {/* Page Header */}
-        <div className="flex items-center gap-3 pb-6 border-b border-slate-100 mb-6">
-          <div className="p-3 bg-orange-500 text-white rounded-xl shadow-md shadow-orange-500/20 flex items-center justify-center text-xl shrink-0">
+        {/* Header Section */}
+        <div className="flex items-center gap-3 pb-5 sm:pb-6 border-b border-slate-100 mb-6 sm:mb-8">
+          <div className="p-2.5 sm:p-3 bg-orange-500 text-white rounded-xl shadow-md shadow-orange-500/20 flex items-center justify-center text-lg sm:text-2xl shrink-0">
             🍲
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
+            <h1 className="text-lg sm:text-2xl font-bold text-slate-900 leading-tight">
               Add New Recipe
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
@@ -62,12 +62,14 @@ export default function AddRecipePage() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           
-          {/* Row 1: Recipe Name & Image */}
+          {/* Grid Layout for Inputs */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            
+            {/* Recipe Name */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-slate-700">
+              <label className="text-xs sm:text-sm font-semibold text-slate-700">
                 Recipe Name <span className="text-rose-500">*</span>
               </label>
               <input
@@ -75,12 +77,13 @@ export default function AddRecipePage() {
                 name="recipeName"
                 required
                 placeholder="e.g., Kacchi Biryani"
-                className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all bg-slate-50/30"
               />
             </div>
 
+            {/* Recipe Image */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+              <label className="text-xs sm:text-sm font-semibold text-slate-700 flex items-center gap-1.5">
                 <Camera className="h-4 w-4 text-slate-500" />
                 Recipe Image (ImgBB) <span className="text-rose-500">*</span>
               </label>
@@ -89,22 +92,20 @@ export default function AddRecipePage() {
                 name="image"
                 accept="image/*"
                 required
-                className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 cursor-pointer border border-slate-200 rounded-xl"
+                className="block w-full text-xs sm:text-sm text-slate-500 file:mr-3 file:py-2 file:px-3.5 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 cursor-pointer border border-slate-200 rounded-xl bg-slate-50/30"
               />
             </div>
-          </div>
 
-          {/* Row 2: Category, Cuisine, Difficulty */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            {/* Category */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-slate-700">
+              <label className="text-xs sm:text-sm font-semibold text-slate-700">
                 Category <span className="text-rose-500">*</span>
               </label>
               <select
                 name="category"
                 required
                 defaultValue=""
-                className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
               >
                 <option value="" disabled>Select category</option>
                 <option value="breakfast">Breakfast</option>
@@ -115,15 +116,16 @@ export default function AddRecipePage() {
               </select>
             </div>
 
+            {/* Cuisine Type */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-slate-700">
+              <label className="text-xs sm:text-sm font-semibold text-slate-700">
                 Cuisine Type <span className="text-rose-500">*</span>
               </label>
               <select
                 name="cuisine"
                 required
                 defaultValue=""
-                className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
               >
                 <option value="" disabled>Select cuisine</option>
                 <option value="bangladeshi">Bangladeshi</option>
@@ -134,8 +136,9 @@ export default function AddRecipePage() {
               </select>
             </div>
 
-            <div className="flex flex-col gap-1.5 sm:col-span-2 md:col-span-1">
-              <label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+            {/* Difficulty Level */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs sm:text-sm font-semibold text-slate-700 flex items-center gap-1.5">
                 <Flame className="h-4 w-4 text-orange-500" />
                 Difficulty Level <span className="text-rose-500">*</span>
               </label>
@@ -143,7 +146,7 @@ export default function AddRecipePage() {
                 name="difficulty"
                 required
                 defaultValue=""
-                className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
               >
                 <option value="" disabled>Select difficulty</option>
                 <option value="easy">Easy</option>
@@ -151,41 +154,41 @@ export default function AddRecipePage() {
                 <option value="hard">Hard</option>
               </select>
             </div>
+
+            {/* Prep Time */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs sm:text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+                <Clock className="h-4 w-4 text-slate-500" />
+                Prep Time (mins) <span className="text-rose-500">*</span>
+              </label>
+              <input
+                type="number"
+                name="prepTime"
+                required
+                min="1"
+                placeholder="e.g., 45"
+                className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all bg-slate-50/30"
+              />
+            </div>
+
           </div>
 
-          {/* Row 3: Prep Time */}
-          <div className="w-full sm:max-w-xs flex flex-col gap-1.5">
-            <label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
-              <Clock className="h-4 w-4 text-slate-500" />
-              Prep Time (mins) <span className="text-rose-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="prepTime"
-              required
-              min="1"
-              placeholder="e.g., 45"
-              className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
-            />
-          </div>
-
-          {/* Row 4: Ingredients */}
+          {/* Full Width Textareas */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-semibold text-slate-700">
+            <label className="text-xs sm:text-sm font-semibold text-slate-700">
               Ingredients <span className="text-rose-500">*</span>
             </label>
             <textarea
               name="ingredients"
               required
-              rows={4}
+              rows={3}
               placeholder="Write ingredients (e.g. 1 kg Rice, 500g Chicken)..."
-              className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+              className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all bg-slate-50/30 resize-y"
             />
           </div>
 
-          {/* Row 5: Instructions */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-semibold text-slate-700">
+            <label className="text-xs sm:text-sm font-semibold text-slate-700">
               Cooking Instructions <span className="text-rose-500">*</span>
             </label>
             <textarea
@@ -193,21 +196,22 @@ export default function AddRecipePage() {
               required
               rows={4}
               placeholder="Write step-by-step instructions..."
-              className="w-full px-4 py-2.5 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
+              className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all bg-slate-50/30 resize-y"
             />
           </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-end pt-4">
+          {/* Responsive Submit Button */}
+          <div className="flex justify-end pt-2 sm:pt-4">
             <Button
               type="submit"
               color="warning"
               isLoading={loading}
-              className="w-full sm:w-auto bg-orange-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg shadow-orange-500/30 hover:bg-orange-600 transition-all"
+              className="w-full sm:w-auto min-w-[160px] bg-orange-500 text-white font-semibold px-6 py-3 rounded-xl shadow-md shadow-orange-500/20 hover:bg-orange-600 transition-all"
             >
               Publish Recipe
             </Button>
           </div>
+
         </form>
       </Card>
     </div>

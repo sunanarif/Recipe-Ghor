@@ -12,11 +12,11 @@ export default function DashboardStatsChart({ totalUsers, totalRecipes, totalPre
   ]
 
   return (
-    <div className="bg-white/70 backdrop-blur-md border border-slate-200/80 rounded-3xl p-5 shadow-xl shadow-slate-200/50 h-[300px] mt-[10%]">
+    <div className="bg-white/70 backdrop-blur-md border border-slate-200/80 rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-xl shadow-slate-200/50 h-[320px] sm:h-[420px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-          <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
+        <BarChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+          <XAxis dataKey="name" tick={{ fontSize: 10 }} angle={-20} textAnchor="end" height={40} />
+          <YAxis allowDecimals={false} tick={{ fontSize: 10 }} width={30} />
           <Tooltip />
           <Bar dataKey="value" radius={[6, 6, 0, 0]}>
             {data.map((_, i) => <Cell key={i} fill={COLORS[i]} />)}

@@ -54,3 +54,4 @@ export const editFeature = async(id,isFeatured)=>{
     })
     return res.json()
 }
+
