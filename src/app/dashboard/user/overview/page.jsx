@@ -13,9 +13,12 @@ const OverviewPage = async () => {
     const recipes = await getRecipeByUserId(user?.id)
     const totalRecipes = recipes.length
     const totalFavorites = favorites.length
+    const totalLikesReceived = recipes.reduce((sum, r) => sum + (r.likesCount || 0), 0)
+
+    // console.log(recipes);
     return (
         <div>
-            <UserStatsCards totalFavorites={totalFavorites} totalRecipes={totalRecipes}></UserStatsCards>
+            <UserStatsCards totalFavorites={totalFavorites} totalRecipes={totalRecipes} totalLikesReceived={totalLikesReceived}></UserStatsCards>
         </div>
     );
 };

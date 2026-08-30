@@ -55,3 +55,22 @@ export const editFeature = async(id,isFeatured)=>{
     return res.json()
 }
 
+export const updateLike = async(id,likesCount)=>{
+    const res = await fetch(`${baseUrl}/edit/recipeLike/${id}`,{
+        method:"PATCH",
+        headers:{
+            'content-type':'application/json'
+        },
+        body:JSON.stringify({likesCount})
+    })
+    return res.json()
+}
+
+export const reportRecipe = async (report) => {
+  const res = await fetch(`${baseUrl}/report`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(report),
+  })
+  return await res.json()
+}
