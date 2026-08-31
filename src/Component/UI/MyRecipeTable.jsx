@@ -5,19 +5,20 @@ import { Button, Chip, Table, Tooltip } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 const MyRecipeTable = ({ recipes = [] }) => {
     const router = useRouter();
     const [loadingId, setLoadingId] = useState(null);
 
     const handleDeleteItem = async (id) => {
-        const confirmDelete = confirm("Are you sure you want to delete this recipe?");
-        if (!confirmDelete) return;
+        
 
         setLoadingId(id);
         try {
             const res = await deleteRecipeById(id);
             if (res?.deletedCount > 0 || res?.success) {
+                toast.error('Recipe Delete')
                 router.refresh();
             }
         } catch (error) {

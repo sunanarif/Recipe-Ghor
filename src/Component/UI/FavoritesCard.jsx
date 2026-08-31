@@ -6,17 +6,18 @@ import { Button, Card } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { LuArrowUpRight } from "react-icons/lu";
 const FavoritesCard = ({ favoriteData }) => {
     const router = useRouter();
     const { recipeId, recipeName, image, category, difficulty, cuisine, _id } = favoriteData;
     const handleDeleteItem = async (id) => {
-        const confirmDelete = confirm("Are you sure you want to delete this recipe?");
-        if (!confirmDelete) return;
+        
 
         try {
             const res = await deleteFavorites(id);
             if (res?.deletedCount > 0 || res?.success) {
+                toast.error('Recipe Delete')
                 router.refresh();
             }
         } catch (error) {

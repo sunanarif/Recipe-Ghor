@@ -12,25 +12,29 @@ import {
 import { Envelope, Lock } from '@gravity-ui/icons'
 import Link from 'next/link'
 import { authClient } from '@/lib/auth-client'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function SignInPage() {
     const [loading, setLoading] = useState(false)
+    const [errorMsg, setErrorMsg] = useState('')
     const router = useRouter()
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
+        setErrorMsg('')
 
         const formData = new FormData(e.currentTarget)
         const formValues = Object.fromEntries(formData.entries())
 
-        console.log(formValues);
         const { data, error } = await authClient.signIn.email({
-            email: formValues.email, // required
-            password: formValues.password, // required
-            
+            email: formValues.email,
+            password: formValues.password,
         });
-         if (error) {
+
+        setLoading(false)
+
+        if (error) {
             setErrorMsg(error.message || 'Failed to sign in')
             return
         }
@@ -55,6 +59,12 @@ export default function SignInPage() {
                         Sign in to Recipe Ghor to save and share your recipes
                     </p>
                 </div>
+
+                {errorMsg && (
+                    <div className="mb-4 px-4 py-2.5 rounded-xl bg-rose-50 text-rose-600 text-sm font-medium">
+                        {errorMsg}
+                    </div>
+                )}
 
                 <Form onSubmit={handleSubmit} className="space-y-5">
                     <TextField name="email" type="email" isRequired>

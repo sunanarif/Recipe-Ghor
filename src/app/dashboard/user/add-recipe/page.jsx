@@ -7,6 +7,7 @@ import { addRecipe } from '@/lib/api/action/action'
 import { uploadImage } from '@/lib/api/uploadImage'
 import { authClient } from '@/lib/auth-client'
 import { redirect } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 export default function AddRecipePage() {
   const [loading, setLoading] = useState(false)
@@ -38,6 +39,7 @@ export default function AddRecipePage() {
       const res = await addRecipe(data);
       if (res.insertedId) {
         console.log('Recipe added:', res)
+        toast.success('Add Recipe')
         redirect('/dashboard/user/my-recipe')
       }
     } catch (error) {

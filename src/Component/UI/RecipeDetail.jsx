@@ -10,6 +10,7 @@ import { authClient } from "@/lib/auth-client";
 import { addFavorites, updateLike } from "@/lib/api/action/action";
 import { getFavoritesByUserId } from "@/lib/api/recipes";
 import ReportModal from "./ReportModal";
+import toast from "react-hot-toast";
 
 const difficultyStyles = {
     easy: "bg-emerald-50 text-emerald-600",
@@ -69,16 +70,18 @@ const RecipeDetail = ({ recipe }) => {
         const isAlreadyFavorite = data.some((fav) => fav.recipeId === _id)
         console.log(isAlreadyFavorite);
         if (isAlreadyFavorite) {
-            alert("you already add this")
+            toast.error("you already add this")
             return
         }
         console.log("sending favorites data", favoritesData);
         const res = await addFavorites(favoritesData)
+        toast.success('You add favorites')
         console.log("favorites data res ", res);
     }
     const handleLike = async(id,likesCount)=>{
         console.log(likesCount);
         const res = updateLike(id,likesCount)
+        toast.success('You like the recipe')
         console.log(res);
     }
     return (

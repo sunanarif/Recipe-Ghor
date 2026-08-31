@@ -6,6 +6,7 @@ import { Button, Chip, Table, Tooltip } from '@heroui/react';
 import Link from 'next/link';
 import { deleteRecipeById, editFeature } from '@/lib/api/action/action';
 import { redirect, useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 
 const ManageRecipeTable = ({ recipes }) => {
@@ -20,6 +21,7 @@ const ManageRecipeTable = ({ recipes }) => {
     const handleDeleteItem = async (id) => {
         const res = await deleteRecipeById(id)
         if (res.deletedCount > 0) {
+            toast.error('Recipe Delete')
             router.refresh()
         }
     }

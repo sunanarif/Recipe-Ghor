@@ -5,13 +5,13 @@ import { Button, Chip, Table } from '@heroui/react';
 import { GoBlocked } from 'react-icons/go';
 import { deleteRecipeById, deleteReportById } from '@/lib/api/action/action';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const ReportTable = ({ reports }) => {
     const router = useRouter();
     const handleDeleteItem = async (recipeId,_id) => {
         // console.log(id);
-        const confirmDelete = confirm("Are you sure you want to delete this recipe?");
-        if (!confirmDelete) return;
+       
 
         
         try {
@@ -19,6 +19,7 @@ const ReportTable = ({ reports }) => {
             const reportRes = await deleteReportById(_id);
             console.log(res);
             if (res?.deletedCount > 0 || res?.success) {
+                toast.error('Delete Report')
                 router.refresh();
             }
         } catch (error) {
@@ -33,6 +34,7 @@ const ReportTable = ({ reports }) => {
         try {
             const res = await deleteReportById(id);
             if (res?.deletedCount > 0 || res?.success) {
+                toast.error('Delete Report')
                 router.refresh();
             }
         } catch (error) {

@@ -3,6 +3,7 @@ import { authClient } from '@/lib/auth-client';
 import { TriangleExclamation, XmarkShapeFill } from '@gravity-ui/icons';
 import { Button } from '@heroui/react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 const REASONS = [
     'Spam or misleading',
     'Inappropriate content',
