@@ -28,7 +28,9 @@ export const getRecipeById = async (id) => {
 }
 
 export const getAllRecipe = async () => {
-    const res = await fetch(`${baseUrl}/all/recipe`);
+    const res = await fetch(`${baseUrl}/all/recipe`,{
+        cache:'no-store'
+    });
     return res.json()
 }
 
