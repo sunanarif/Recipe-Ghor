@@ -36,6 +36,9 @@ export default function Navbar() {
     if (pathName.includes("dashboard")) {
         return null
     }
+    if (pathName.includes("user-block")) {
+        return null
+    }
 
     return (
         <nav className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md">

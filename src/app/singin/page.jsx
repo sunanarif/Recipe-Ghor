@@ -12,11 +12,11 @@ import {
 import { Envelope, Lock } from '@gravity-ui/icons'
 import Link from 'next/link'
 import { authClient } from '@/lib/auth-client'
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 
 export default function SignInPage() {
     const [loading, setLoading] = useState(false)
-
+    const router = useRouter()
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
@@ -28,9 +28,19 @@ export default function SignInPage() {
         const { data, error } = await authClient.signIn.email({
             email: formValues.email, // required
             password: formValues.password, // required
-            callbackURL: "/",
+            
         });
-        // console.log(data);
+         if (error) {
+            setErrorMsg(error.message || 'Failed to sign in')
+            return
+        }
+
+        if (data?.user?.isBlock) {
+            router.push('/user-block')
+            return
+        }
+
+        router.push('/')
     }
 
     return (

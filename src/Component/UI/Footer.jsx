@@ -14,7 +14,9 @@ export default function AppFooter() {
   if (pathName.includes("dashboard")) {
     return null;
   }
-
+  if (pathName.includes("user-block")) {
+        return null
+    }
   return (
     <footer className="w-full  border-t border-border bg-background py-8 sm:py-10 mt-10">
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:px-6 md:flex-row md:gap-8">

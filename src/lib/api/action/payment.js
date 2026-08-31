@@ -1,5 +1,15 @@
 "use server"
+
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
+
 const baseUrl = process.env.SERVER_URL
+const getToken = async () => {
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
+    return token
+}
 
 export const subscription = async(data)=>{
     const res = await fetch(`${baseUrl}/subscription`,{
@@ -24,6 +34,11 @@ export const purchase = async(data)=>{
 }
 
 export const transaction = async()=>{
-    const res = await fetch(`${baseUrl}/subscription`)
+    const token = await getToken()
+    const res = await fetch(`${baseUrl}/subscription`,{
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
     return res.json()
 }
