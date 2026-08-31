@@ -40,10 +40,10 @@ export default function FAQ() {
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-10 sm:py-16">
       <div className="text-center mb-8 sm:mb-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100">
           Frequently Asked Questions
         </h2>
-        <p className="text-sm sm:text-base text-slate-500 mt-2">
+        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-2">
           Everything you need to know about Recipe Ghor
         </p>
       </div>
@@ -54,27 +54,29 @@ export default function FAQ() {
           return (
             <div
               key={index}
-              className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-sm"
+              className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition-colors"
             >
               <button
                 onClick={() => toggle(index)}
-                className="w-full flex items-center justify-between gap-4 text-left px-4 sm:px-6 py-4 sm:py-5"
+                className="w-full flex items-center justify-between gap-4 text-left px-4 sm:px-6 py-4 sm:py-5 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors"
               >
-                <span className="font-semibold text-slate-800 text-sm sm:text-base">
+                <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm sm:text-base">
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-orange-500 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
-                    }`}
+                  className={`w-5 h-5 text-orange-500 shrink-0 transition-transform duration-200 ${
+                    isOpen ? 'rotate-180' : ''
+                  }`}
                 />
               </button>
 
               <div
-                className={`grid transition-all duration-200 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-                  }`}
+                className={`grid transition-all duration-200 ease-in-out ${
+                  isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                }`}
               >
                 <div className="overflow-hidden">
-                  <p className="px-4 sm:px-6 pb-4 sm:pb-5 text-sm text-slate-600 leading-relaxed">
+                  <p className="px-4 sm:px-6 pb-4 sm:pb-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>

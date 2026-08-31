@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { ArrowRightFromSquare, Gear, Persons } from "@gravity-ui/icons";
 import { Avatar, Dropdown, Label } from "@heroui/react";
+import { ThemeToggle } from "./ThemeToggle";
 export default function Navbar() {
 
     const navLinks = [
@@ -176,6 +177,8 @@ export default function Navbar() {
                                 </Link>
                             </div>
                     }
+                    
+                <ThemeToggle></ThemeToggle>
                 </div>
             </header>
 
