@@ -8,12 +8,15 @@ import React from 'react';
 
 const ProfilePage = async () => {
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
+    query: {
+      disableCookieCache: true
+    }
   })
   const user = session?.user
 
   // Check if user is premium
-  const isPremium = user?.plan === 'premium';
+  const isPremium = user?.plan ;
 
   // Fallback image handling
   const userAvatar = user?.image || 'https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png';
@@ -59,7 +62,7 @@ const ProfilePage = async () => {
                 </p>
 
                 <div className="mt-3 flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                  {isPremium ? (
+                  {isPremium == 'premium' ? (
                     <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-medium bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                       <ShieldCheck className="w-3.5 h-3.5" />
                       Premium
@@ -135,11 +138,11 @@ const ProfilePage = async () => {
             </div>
 
             <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              {isPremium ? 'Premium Member' : 'Upgrade to Premium'}
+              {isPremium == 'premium' ? 'Premium Member' : 'Upgrade to Premium'}
             </h3>
 
             <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1 mb-8">
-              {isPremium
+              {isPremium == 'premium'
                 ? 'Exclusive features are currently active.'
                 : 'Unlock all exclusive recipe creation tools and perks.'}
             </p>
@@ -171,7 +174,7 @@ const ProfilePage = async () => {
 
           {/* Action Button */}
           <div className="mt-8">
-            {isPremium ? (
+            {isPremium == 'premium' ? (
               <form method='POST' action={'/api/subscription'}>
                 <Button type='submit' className="w-full py-3.5 px-4 bg-amber-100/80 dark:bg-amber-950/40 border border-amber-300/80 dark:border-amber-800/60 text-amber-800 dark:text-amber-300 font-bold rounded-2xl text-center flex items-center justify-center gap-2 shadow-sm">
                   <Check className="w-5 h-5 text-amber-600 dark:text-amber-400 stroke-[3]" />

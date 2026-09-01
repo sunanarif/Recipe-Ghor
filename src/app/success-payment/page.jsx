@@ -86,7 +86,7 @@ export default async function Success({ searchParams }) {
               </Button>
             </Link>
 
-            <Link href="/dashboard" className="w-full sm:w-auto">
+            <Link href="/dashboard/user/profile" className="w-full sm:w-auto">
               <Button
                 variant="bordered"
                 className="w-full border-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"

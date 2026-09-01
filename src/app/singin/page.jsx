@@ -8,11 +8,14 @@ import {
     Button,
     Card,
     Checkbox,
+    Separator,
 } from '@heroui/react'
 import { Envelope, Lock } from '@gravity-ui/icons'
 import Link from 'next/link'
 import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
+import { IconBase } from 'react-icons'
+import { FcGoogle } from 'react-icons/fc'
 
 export default function SignInPage() {
     const [loading, setLoading] = useState(false)
@@ -45,6 +48,13 @@ export default function SignInPage() {
         }
 
         router.push('/')
+    }
+
+    const handleGoogleSignin = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        })
+
     }
 
     return (
@@ -99,6 +109,21 @@ export default function SignInPage() {
                         Sign In
                     </Button>
                 </Form>
+                <div>
+                    <div className="flex justify-center items-center gap-3">
+                        <Separator />
+                        <div className="whitespace-nowrap">
+                            Or sing with
+                        </div>
+                        <Separator />
+                    </div>
+                    <div>
+                        <Button onClick={handleGoogleSignin} className="w-full" variant="tertiary">
+                            <IconBase icon="devicon:google" />
+                            <FcGoogle />Sign in with Google
+                        </Button>
+                    </div>
+                </div>
 
                 <p className="text-center text-sm text-slate-500 mt-6">
                     Don&apos;t have an account?{' '}
