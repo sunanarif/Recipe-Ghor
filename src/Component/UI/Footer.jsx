@@ -31,7 +31,7 @@ export default function AppFooter() {
 
             <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-orange-600">
               Recipe
-              <span className="text-foreground">Ghor</span>
+              <span className="text-foreground">Hub</span>
             </span>
           </Link>
         </div>

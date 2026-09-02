@@ -90,7 +90,7 @@ export default function Navbar() {
 
                         <span className="text-xl font-extrabold tracking-tight text-orange-600">
                             Recipe
-                            <span className="text-foreground">Ghor</span>
+                            <span className="text-foreground">Hub</span>
                         </span>
                     </Link>
                 </div>

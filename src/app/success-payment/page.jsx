@@ -101,10 +101,10 @@ export default async function Success({ searchParams }) {
           <p className="text-xs text-slate-400 mt-8">
             Have any questions? Reach out to us at{' '}
             <a
-              href="mailto:support@recipeghor.com"
+              href="mailto:support@RecipeHub.com"
               className="text-orange-500 font-medium hover:underline"
             >
-              support@recipeghor.com
+              support@RecipeHub.com
             </a>
           </p>
         </Card>

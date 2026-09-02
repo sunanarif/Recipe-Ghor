@@ -18,7 +18,7 @@ export default function AboutPage() {
           🍲
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
-          About Recipe Ghor
+          About Recipe Hub
         </h1>
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-3 max-w-xl mx-auto">
           A home for anyone who loves cooking, sharing, and discovering recipes — from traditional Bangladeshi dishes to flavors from around the world.
@@ -53,7 +53,7 @@ export default function AboutPage() {
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">Our Story</h2>
         </div>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-          Recipe Ghor started with a simple idea — cooking is better when it's shared. Whether it's a family Kacchi Biryani recipe passed down for generations or a quick weeknight dinner idea, everyone has something worth sharing. We built this platform so home cooks could publish their own recipes, discover new ones, save their favorites, and connect over good food.
+          Recipe Hub started with a simple idea — cooking is better when it's shared. Whether it's a family Kacchi Biryani recipe passed down for generations or a quick weeknight dinner idea, everyone has something worth sharing. We built this platform so home cooks could publish their own recipes, discover new ones, save their favorites, and connect over good food.
         </p>
       </div>
 
