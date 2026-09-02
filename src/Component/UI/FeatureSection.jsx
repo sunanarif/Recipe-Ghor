@@ -1,11 +1,11 @@
-import { getAllRecipe } from '@/lib/api/recipes';
+import { getAllRecipeWithoutPagination } from '@/lib/api/recipes';
 import React from 'react';
 
 import ShearedRecipeCard from './ShearedRecipeCard';
 
 const FeatureSection = async () => {
-    const recipes = await getAllRecipe()
-    const filterRecipes = recipes.result.filter(recipe => recipe.isFeatured === true)
+    const recipes = await getAllRecipeWithoutPagination()
+    const filterRecipes = recipes.filter(recipe => recipe.isFeatured === true)
     console.log(filterRecipes);
     return (
         <div className='max-w-[1200px] mx-auto py-2'>

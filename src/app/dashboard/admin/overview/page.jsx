@@ -2,14 +2,14 @@ import DashboardStatsChart from '@/Component/Dashboard/DashboardStatsChart';
 
 
 import { subscription, transaction } from '@/lib/api/action/payment';
-import { getAllRecipe, getReport } from '@/lib/api/recipes';
+import {  getAllRecipeWithoutPagination, getReport } from '@/lib/api/recipes';
 import { userInfo } from '@/lib/api/userInfo';
 import React from 'react';
 
 const OverviewPage = async () => {
     const user = await userInfo()
     const totalUsers = user.length
-    const recipes = await getAllRecipe()
+    const recipes = await getAllRecipeWithoutPagination()
     const totalRecipes = recipes.length
     const premiumMembers = await transaction()
     const reports = await getReport()

@@ -1,9 +1,10 @@
 "use client";
 
-import { Eye, Flame, Bookmark } from "@gravity-ui/icons";
+import { Eye, Flame, Bookmark, HeartFill } from "@gravity-ui/icons";
 import { Button, Card } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { LiaKeySolid } from "react-icons/lia";
 import { LuArrowUpRight } from "react-icons/lu";
 
 const difficultyStyles = {
@@ -14,7 +15,7 @@ const difficultyStyles = {
 
 export default function ShearedRecipeCard({ recipe }) {
     const { _id, recipeName, image, category, difficulty, cuisine } = recipe;
-
+    // console.log(recipe.like);
     const difficultyClass =
         difficultyStyles[difficulty?.toLowerCase()] || "bg-slate-100 text-slate-600";
 
@@ -36,9 +37,14 @@ export default function ShearedRecipeCard({ recipe }) {
                     <div className='text-[1rem]'>
                         <p className="text-gray-500 capitalize">{cuisine}</p>
                     </div>
-                    <Link href={`/recipes/${_id}`}>
+                   <div className="flex justify-between">
+                     <Link href={`/recipes/${_id}`}>
                         <Button className={"font-semibold text-white bg-orange-500 rounded-md"}>Detail <LuArrowUpRight /></Button>
                     </Link>
+                    <div className="flex items-center gap-2">
+                        <HeartFill/>{recipe.likesCount}
+                    </div>
+                   </div>
                 </div>
             </Card>
         </div>

@@ -202,7 +202,8 @@ export default function Navbar() {
                         ))}
 
                         {/* Mobile Sign In */}
-                        <li className="pt-2 ">
+                        {
+                            user ? <></> : <li className="pt-2 ">
                             <Link href="/singin" >
                                 <Button
                                     onClick={() => setIsMenuOpen(false)}
@@ -225,6 +226,7 @@ export default function Navbar() {
                             </Link>
 
                         </li>
+                        }
                     </ul>
                 </div>
             )}

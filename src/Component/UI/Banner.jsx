@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import bannerImage from '../../../public/Assests/bannerImage.jpg';
+import Link from 'next/link';
 
 const Banner = () => {
   return (
@@ -26,12 +27,10 @@ const Banner = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
-            <button className="rounded-xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:bg-orange-600 hover:shadow-orange-500/50 focus:outline-none focus:ring-2 focus:ring-orange-400">
+            <Link href={'/recipes'} className="rounded-xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:bg-orange-600 hover:shadow-orange-500/50 focus:outline-none focus:ring-2 focus:ring-orange-400">
               Explore Recipes
-            </button>
-            <button className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:focus:ring-slate-700">
-              Today&lsquo;s Special
-            </button>
+            </Link>
+            
           </div>
         </div>
 

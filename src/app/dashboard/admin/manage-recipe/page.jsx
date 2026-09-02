@@ -1,9 +1,9 @@
 import ManageRecipeTable from '@/Component/UI/ManageRecipeTable';
-import { getAllRecipe } from '@/lib/api/recipes';
+import {  getAllRecipeWithoutPagination } from '@/lib/api/recipes';
 import React from 'react';
 
 const ManageRecipePage = async() => {
-    const recipes = await getAllRecipe()
+    const recipes = await getAllRecipeWithoutPagination()
     console.log(recipes);
     return (
         <div>

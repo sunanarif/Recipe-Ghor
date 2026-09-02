@@ -27,10 +27,15 @@ export const getRecipeById = async (id) => {
     return res.json()
 }
 
-export const getAllRecipe = async (page,limit) => {
-    const res = await fetch(`${baseUrl}/all/recipe?page=${page}&limit=${limit}`,{
+export const getAllRecipe = async (page,serachText,category) => {
+    const res = await fetch(`${baseUrl}/all/recipe?page=${page}&search=${serachText}&category=${category}`,{
         cache:'no-store'
     });
+    return res.json()
+}
+
+export const getAllRecipeWithoutPagination=async()=>{
+    const res = await fetch(`${baseUrl}/recipe`)
     return res.json()
 }
 
