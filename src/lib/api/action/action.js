@@ -44,32 +44,18 @@ export const addFavorites = async(favoritesdata)=>{
      return data
 }
 
-export const editFeature = async (id, isFeatured) => {
-    try {
-        const res = await fetch(`${baseUrl}/edit/feature/${id}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ isFeatured }),
-            cache: 'no-store' // ক্যাশ বন্ধ রাখার জন্য
-        });
-
-        if (!res.ok) {
-            throw new Error('Failed to update feature status');
-        }
-
-        const data = await res.json();
-
-        // UI সাথে সাথে রিফ্রেশ করতে আপনার ড্যাশবোর্ডের Route পাথ দিন
-        revalidatePath('/dashboard/user/my-recipe');
-
-        return data;
-    } catch (error) {
-        console.error("Error in editFeature:", error);
-        return { success: false, error: error.message };
-    }
+export const editFeature = async(id,isFeatured)=>{
+    const res = await fetch(`${baseUrl}/edit/feature/${id}`,{
+        method:"PATCH",
+        headers:{
+            'content-type':'application/json'
+        },
+        body:JSON.stringify({isFeatured}),
+        cache:'no-store'
+    })
+    return res.json()
 }
+
 export const updateLike = async(id,likesCount)=>{
     const res = await fetch(`${baseUrl}/edit/recipeLike/${id}`,{
         method:"PATCH",
