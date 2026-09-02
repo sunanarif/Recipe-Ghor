@@ -26,7 +26,7 @@ const CategoryFilter = () => {
             selectedValue = keys;
         }
 
-        // "all" সিলেক্ট করা হলে বা ফাঁকা থাকলে ক্যাটাগরি প্যারামিটার ক্লিয়ার হবে
+       
         if (selectedValue === 'all') {
             selectedValue = '';
         }

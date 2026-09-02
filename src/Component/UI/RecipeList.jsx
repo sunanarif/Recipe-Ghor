@@ -9,7 +9,6 @@ import { LuArrowUpRight } from 'react-icons/lu';
 const RecipeList = ({ initialRecipes = [] }) => {
     if (!initialRecipes.length) return null;
 
-    // অসীম স্ক্রলিংয়ের (Loop Animation) জন্য ডাটা ২ বার ডুপ্লিকেট করা
     const duplicatedRecipes = [...initialRecipes, ...initialRecipes];
 
     return (
@@ -19,10 +18,10 @@ const RecipeList = ({ initialRecipes = [] }) => {
                 animate={{ x: ['0%', '-50%'] }}
                 transition={{
                     ease: 'linear',
-                    duration: 25, // গতি কমাতে বা বাড়াতে এই মান পরিবর্তন করুন
+                    duration: 25, 
                     repeat: Infinity,
                 }}
-                whileHover={{ transition: { duration: 0 } }} // মাউস হভার করলে থামবে
+                whileHover={{ transition: { duration: 0 } }} 
             >
                 {duplicatedRecipes.map((recipe, index) => {
                     const likes = recipe?.likescount ?? recipe?.likecount ?? recipe?.likeCount ?? recipe?.likes ?? 0;
