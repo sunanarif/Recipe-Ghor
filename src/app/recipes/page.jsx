@@ -2,16 +2,17 @@ import RecipeCard from '@/Component/UI/RecepiCard';
 import { getAllRecipe } from '@/lib/api/recipes';
 import React from 'react';
 
-const RecipePage = async () => {
-    const allRecipes = await getAllRecipe()
+const RecipePage = async ({searchParams}) => {
+    const searchQuery = await searchParams
+    const page = searchQuery.page
+    const limit = searchQuery.limit
+    const allRecipes = await getAllRecipe(page,limit)
     console.log(allRecipes);
     return (
         <div className='max-w-[1200px] mx-auto py-2'>
             <h1 className="text-[32px] font-bold">Recipes</h1>
-            <div className='grid grid-cols-1 md:grid-cols-3 w-full  py-6'>
-                {
-                    allRecipes.map(recipe => <RecipeCard key={recipe._id} recipe={recipe}></RecipeCard>)
-                }
+            <div>
+                <RecipeCard allRecipes={allRecipes}></RecipeCard>
 
             </div>
         </div>

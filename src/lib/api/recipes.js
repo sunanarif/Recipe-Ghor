@@ -27,8 +27,8 @@ export const getRecipeById = async (id) => {
     return res.json()
 }
 
-export const getAllRecipe = async () => {
-    const res = await fetch(`${baseUrl}/all/recipe`,{
+export const getAllRecipe = async (page,limit) => {
+    const res = await fetch(`${baseUrl}/all/recipe?page=${page}&limit=${limit}`,{
         cache:'no-store'
     });
     return res.json()
