@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍳 Recipe Hub 
 
-## Getting Started
+A modern, responsive, and feature-rich web application built for recipe enthusiasts to discover, filter, and browse delicious recipes seamlessly.
 
-First, run the development server:
+🌐 **Live Demo:** [recipe-ghor.vercel.app](https://recipe-ghor.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌟 Key Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+* **Dynamic Recipe Showcase:** Browse a curated collection of diverse recipes with high-quality images, category labels, and details.
+* **Smart Category Filtering:** Instantly filter recipes by categories like Breakfast, Lunch, Dinner, Snack, and Dessert with real-time URL state synchronization.
+* **Top-Liked Showcase:** Automatically highlights the most popular recipes in a dedicated section using `likescount`.
+* **Smooth Infinite Carousel:** Animated horizontal marquee powered by Framer Motion for showcasing featured top-liked recipes.
+* **Search Functionality:** Easily search recipes by title or keyword.
+* **Responsive Layout:** Beautiful grid and flexbox layouts optimized for mobile, tablet, and desktop screens.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+**Client & Framework:**
+* Next.js (App Router)
+* React.js
+* Tailwind CSS
+* HeroUI / React Aria Component Library
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Animation & Icons:**
+* Framer Motion
+* React Icons
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🚀 Getting Started
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Follow these instructions to set up and run the project locally.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Prerequisites
+
+Ensure you have the following installed:
+* **Node.js**: v18.0.0 or higher
+* **npm**, **pnpm**, or **yarn**
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/your-username/recipe-hub.git](https://github.com/your-username/recipe-hub.git)
+   cd recipe-hub
