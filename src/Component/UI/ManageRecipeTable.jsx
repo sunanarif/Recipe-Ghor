@@ -1,30 +1,50 @@
 "use client"
-import React from 'react';
-import { ArrowUpRightFromSquare, Eye, Pencil, TrashBin } from '@gravity-ui/icons';
+import React, { useState } from 'react';
+import { ArrowUpRightFromSquare } from '@gravity-ui/icons';
 import { Button, Chip, Table, Tooltip } from '@heroui/react';
 
 import Link from 'next/link';
 import { deleteRecipeById, editFeature } from '@/lib/api/action/action';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-
 const ManageRecipeTable = ({ recipes }) => {
-    console.log(recipes);
-    const router = useRouter()
+    const router = useRouter();
+    const [loadingId, setLoadingId] = useState(null); // লোডিং ট্র্যাক রাখার জন্য
+
     const handleFeature = async (id, isFeatured) => {
-        const res = await editFeature(id, isFeatured)
-        if (res.modifiedCount > 0) {
-            router.refresh()
+        try {
+            setLoadingId(id);
+            // Server action trigger
+            const res = await editFeature(id, isFeatured);
+            
+            if (res?.modifiedCount > 0 || res?.acknowledged) {
+                toast.success(`Recipe ${isFeatured ? 'Featured' : 'Unfeatured'} successfully!`);
+                router.refresh();
+            } else {
+                toast.error('Failed to update status');
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Something went wrong!');
+        } finally {
+            setLoadingId(null);
         }
-    }
+    };
+
     const handleDeleteItem = async (id) => {
-        const res = await deleteRecipeById(id)
-        if (res.deletedCount > 0) {
-            toast.error('Recipe Delete')
-            router.refresh()
+        try {
+            const res = await deleteRecipeById(id);
+            if (res?.deletedCount > 0) {
+                toast.error('Recipe Deleted');
+                router.refresh();
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Failed to delete');
         }
-    }
+    };
+
     return (
         <div className="w-full bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-xl shadow-slate-200/50 mt-6 sm:mt-10">
 
@@ -40,7 +60,7 @@ const ManageRecipeTable = ({ recipes }) => {
                     </div>
                 </div>
                 <Chip variant="flat" color="warning" size="sm" className="font-bold self-start sm:self-auto">
-                    {recipes.length} Recipes
+                    {recipes?.length || 0} Recipes
                 </Chip>
             </div>
 
@@ -66,7 +86,7 @@ const ManageRecipeTable = ({ recipes }) => {
 
                         {/* Rows */}
                         <Table.Body emptyContent={<div className="py-8 text-center text-slate-400">No recipes found.</div>}>
-                            {recipes.map((recipe) => {
+                            {recipes?.map((recipe) => {
                                 return (
                                     <Table.Row
                                         key={recipe._id}
@@ -110,24 +130,22 @@ const ManageRecipeTable = ({ recipes }) => {
                                         <Table.Cell className="py-3 sm:py-4 px-3 sm:px-6 text-right">
                                             <div className="flex items-center justify-end gap-1 sm:gap-1.5">
 
-                                                <Tooltip content="View Recipe">
-                                                    {
-                                                        recipe.isFeatured ? <Button
-                                                            onClick={() => handleFeature(recipe._id, !recipe.isFeatured)}
-                                                            size="sm"
-                                                            className="px-2.5 sm:px-4 py-1.5 bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-600 rounded-xl transition-all shadow-sm flex items-center justify-center text-xs whitespace-nowrap"
-                                                        >
-                                                            Unfeature
-                                                        </Button> :
-                                                            <Button
-                                                                onClick={() => handleFeature(recipe._id, !recipe.isFeatured)}
-                                                                size="sm"
-                                                                className="px-2.5 sm:px-4 py-1.5 bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-600 rounded-xl transition-all shadow-sm flex items-center justify-center text-xs whitespace-nowrap"
-                                                            >
-                                                                Feature
-                                                            </Button>
-                                                    }
-                                                </Tooltip>
+                                                {/* Feature / Unfeature Button */}
+                                                <Button
+                                                    isDisabled={loadingId === recipe._id}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleFeature(recipe._id, !recipe.isFeatured);
+                                                    }}
+                                                    size="sm"
+                                                    className={`px-2.5 sm:px-4 py-1.5 rounded-xl transition-all shadow-sm flex items-center justify-center text-xs whitespace-nowrap ${
+                                                        recipe.isFeatured 
+                                                            ? 'bg-slate-800 text-white hover:bg-slate-700' 
+                                                            : 'bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-600'
+                                                    }`}
+                                                >
+                                                    {loadingId === recipe._id ? 'Updating...' : recipe.isFeatured ? 'Unfeature' : 'Feature'}
+                                                </Button>
 
                                                 {/* Edit Button */}
                                                 <Tooltip content="Edit Recipe">
