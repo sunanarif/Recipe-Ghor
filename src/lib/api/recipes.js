@@ -35,7 +35,9 @@ export const getAllRecipe = async (page,serachText,category) => {
 }
 
 export const getAllRecipeWithoutPagination=async()=>{
-    const res = await fetch(`${baseUrl}/recipe`)
+    const res = await fetch(`${baseUrl}/recipe`,{
+        cache:'no-store'
+    })
     return res.json()
 }
 
