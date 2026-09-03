@@ -20,7 +20,7 @@ const EditProfile = ({ user }) => {
         console.log(editdata);
         if (editdata.modifiedCount > 0) {
             toast.success('Update Profile')
-            redirect('/profile')
+            redirect('/dashboard/user/profile')
         }
 
     }
