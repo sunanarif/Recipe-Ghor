@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { cache, useState } from "react";
 import Link from "next/link";
 import { Button, Input } from "@heroui/react";
 import { usePathname } from "next/navigation";
@@ -25,6 +25,7 @@ export default function Navbar() {
         isPending, //loading state
         error, //error object
         refetch //refetch the session
+        
     } = authClient.useSession()
     
     const user = session?.user

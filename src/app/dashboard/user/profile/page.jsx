@@ -1,3 +1,4 @@
+import EditProfile from '@/Component/UI/EditProfile';
 import { auth } from '@/lib/auth';
 import { Person, ShieldCheck, CrownDiamond, Check, Gear, Envelope, Picture } from '@gravity-ui/icons';
 import { Card, Button } from '@heroui/react';
@@ -13,12 +14,14 @@ const ProfilePage = async () => {
       disableCookieCache: true
     }
   })
+  // const handleUserEdit = async()=>{
+  //   const res = await 
+  // }
   const user = session?.user
 
-  // Check if user is premium
+
   const isPremium = user?.plan ;
 
-  // Fallback image handling
   const userAvatar = user?.image || 'https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png';
 
   return (
@@ -78,13 +81,8 @@ const ProfilePage = async () => {
                 </div>
               </div>
 
-              <Button
-                size="sm"
-                className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold px-3 py-2 rounded-xl text-xs flex items-center gap-1 self-center sm:self-start shrink-0"
-              >
-                <Gear className="w-3.5 h-3.5" />
-                Edit
-              </Button>
+             
+                 <EditProfile user={user}></EditProfile>
             </div>
 
             {/* Personal Info Grid */}
