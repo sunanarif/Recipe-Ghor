@@ -115,11 +115,11 @@ const SingUpPage = () => {
 
                 <div>
                     <div className="flex justify-center items-center gap-3">
-                        <Separator />
-                        <div className="whitespace-nowrap">
+                        <Separator className='w-[150px]' />
+                        <div className="whitespace-nowrap my-4 ">
                             Or sing with
                         </div>
-                        <Separator />
+                        <Separator className='w-[150px]'/>
                     </div>
                     <div>
                         <Button onClick={handleGoogleSignin} className="w-full" variant="tertiary">

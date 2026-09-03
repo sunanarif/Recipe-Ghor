@@ -42,7 +42,7 @@ const FavoritesCard = ({ favoriteData }) => {
 
                     {/* Content */}
                     <div className="space-y-1">
-                        <h1 className="capitalize text-lg font-bold text-slate-900 line-clamp-1">
+                        <h1 className="capitalize text-lg font-bold text-slate-900 line-clamp-1 dark:text-white">
                             {recipeName}
                         </h1>
                         <p className="text-sm font-medium text-slate-500 capitalize">
